@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Blank </ion-title>
+    <ion-title> Productos </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,23 +8,30 @@
   <ion-row>
     <ion-col>
       <ion-list>
-        <ion-item-sliding
-          *ngFor="let item of products; let i = index"
-          (click)="getProductById(item.id)"
-        >
+        <ion-item-sliding *ngFor="let item of products; let i = index">
           <ion-item>
-            <img [src]="item.photo">
-            <ion-label>{{item.nombre}}</ion-label>
-            <ion-label>{{item.precio}}</ion-label>
-            <ion-button (click)="addCar" expand="block">
+            <img [src]="item.photo" style="margin: 4px ;" (click)="getProductById(item.id)">
+            <ion-label>
+              <ion-chip color="primary">
+                <ion-label (click)="getProductById(item.id)">{{item.nombre}}</ion-label>
+              </ion-chip>
+            </ion-label>
+            <ion-label>
+              <ion-chip color="primary">
+                <ion-label (click)="getProductById(item.id)">$ {{item.precio}}</ion-label>
+              </ion-chip>
+            </ion-label>
+            <ion-button (click)="addCar(item.id)" expand="block">
               <ion-icon name="cart-outline"></ion-icon>
             </ion-button>
           </ion-item>
         </ion-item-sliding>
-        <ion-button  expand="block">
-          <ion-icon name="cart-outline"></ion-icon>
-        </ion-button>
       </ion-list>
     </ion-col>
+    <ion-fab vertical="bottom" horizontal="end" (click)="goCar()">
+      <ion-fab-button color="warning">
+        <ion-icon name="cart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </ion-row>
 </ion-content>

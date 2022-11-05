@@ -9,20 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  private carrito:Producto[];
   public products: Producto[];
-
+  
   constructor(private productoService: ProductoService, private router: Router) {
     this.products = this.productoService.getProduct();
   }
-
-  public getProductById(id: number) {
-    this.router.navigate(['/producto'], {
-      queryParams: {id:id}
-    });
-  }
+  
+  public getProductById(ident: number) {
+    this.router.navigate(
+      ['/producto'], 
+      {
+        queryParams: {id:ident}
+      }
+      );
+    }
   public addCar(pos:number){
-    this.carrito.push(this.products[pos]);  
+    this.productoService.addCar(pos);
+  }
+
+  public goCar(){
+    this.router.navigate(['/carrito']);
   }
 
 }
+  

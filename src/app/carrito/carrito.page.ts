@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Producto } from '../models/producto';
+import { ProductoService } from '../services/producto.service';
 
 @Component({
   selector: 'app-carrito',
@@ -7,8 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarritoPage implements OnInit {
 
-  constructor() { }
+  public car : Producto[];
+  public total: number = 0;
 
+  constructor(private productoService:ProductoService) { 
+    this.car = this.productoService.getCar();
+    this.total = this.productoService.getTotal();
+  }
   ngOnInit() {
   }
 

@@ -3,5 +3,6 @@ export class Producto {
     nombre: string;
     precio: number;
     descripcion: string;
-    photo?: string;
+    photo: string;
+    cantidad:number;
 }

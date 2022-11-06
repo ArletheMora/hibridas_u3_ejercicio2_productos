@@ -17,7 +17,7 @@ export class ProductoService {
         nombre: 'Jabón',
         precio: 15,
         descripcion: 'Jabón neutro',
-        photo:"https://picsum.photos/75/?random=1",
+        photo:"https://picsum.photos/400/?random=1",
         cantidad:0
       },
       {
@@ -25,7 +25,7 @@ export class ProductoService {
         nombre: 'T.V',
         precio: 15000,
         descripcion: 'Televisón multimedia',
-        photo:"https://picsum.photos/75/?random=2",
+        photo:"https://picsum.photos/400/?random=2",
         cantidad:0
       },
       {
@@ -33,7 +33,7 @@ export class ProductoService {
         nombre: 'Mouse',
         precio: 400,
         descripcion: 'Mouse especializado a oficina',
-        photo:"https://picsum.photos/75/?random=3",
+        photo:"https://picsum.photos/400/?random=3",
         cantidad:0
       },
     ]

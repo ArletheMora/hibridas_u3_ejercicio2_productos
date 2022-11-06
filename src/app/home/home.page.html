@@ -8,21 +8,25 @@
   <ion-row>
     <ion-col>
       <ion-list>
-        <ion-item-sliding
-          *ngFor="let item of products; let i = index"
-          [routerLink]="['/producto', item.id]"
-        >
+        <ion-item-sliding *ngFor="let item of products; let i = index">
           <ion-item>
-            <img [src]="item.photo" style="margin: 4px" />
-            <ion-label>
+            <ion-avatar>
+              <img
+              [src]="item.photo"
+              style="margin: 4px"
+              [routerLink]="['/producto', item.id]"
+            />
+            </ion-avatar>
+            
+            <ion-label [routerLink]="['/producto', item.id]">
               <ion-chip color="primary">
                 <ion-label (click)="getProductById(item.id)"
                   >{{item.nombre}}</ion-label
                 >
               </ion-chip>
             </ion-label>
-            <ion-label>
-              <ion-chip color="primary">
+            <ion-label [routerLink]="['/producto', item.id]">
+              <ion-chip color="primary" [routerLink]="['/producto', item.id]">
                 <ion-label (click)="getProductById(item.id)"
                   >$ {{item.precio}}</ion-label
                 >

@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>producto</ion-title>
+    <ion-title>Producto {{producto.nombre}}</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content> 
+  <ion-card>
+    <img [src]="producto.photo" alt="">
+    <ion-card-header>
+      <ion-card-title>{{producto.nombre}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>Descripción: {{producto.descripcion}}</h2><br>
+      <h2>Precio unitario: {{producto.precio}}</h2><br>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

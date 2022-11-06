@@ -10,26 +10,25 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
   public products: Producto[];
-  
+
   constructor(private productoService: ProductoService, private router: Router) {
     this.products = this.productoService.getProduct();
   }
-  
-  public getProductById(ident: number) {
+
+  public getProductById(ident: string) {
     this.router.navigate(
-      ['/producto'], 
+      ['/producto'],
       {
-        queryParams: {id:ident}
+        queryParams: { id: ident }
       }
-      );
-    }
-  public addCar(pos:number){
-    this.productoService.addCar(pos);
+    );
+  }
+  public addCar(pos: string) {
+    this.productoService.addCar(parseInt(pos));
   }
 
-  public goCar(){
+  public goCar() {
     this.router.navigate(['/carrito']);
   }
 
 }
-  

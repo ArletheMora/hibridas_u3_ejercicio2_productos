@@ -78,4 +78,8 @@ export class ProductoService {
   public removeCar(pos:number){
     this.carrito.splice(pos, 1)
   }
+
+  public addProduct(newProduct: Producto){
+    this.producto.push(newProduct);
+  }
 }

@@ -13,7 +13,9 @@
       <ion-list>
         <ion-item-sliding *ngFor="let item of car; let i = index">
           <ion-item>
-            <img [src]="item.photo" style="margin: 4px ;">
+            <ion-avatar>
+              <img [src]="item.photo" style="margin: 4px ;">
+            </ion-avatar>
             <ion-label>
               <ion-chip color="primary" style="margin-left: 2%; margin-right: 30%;">
                 <ion-label>{{item.nombre}}</ion-label>

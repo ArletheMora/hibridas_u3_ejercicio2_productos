@@ -31,4 +31,8 @@ export class HomePage {
     this.router.navigate(['/carrito']);
   }
 
+  public goNewProduct(){
+    this.router.navigate(['/nuevo-producto']);
+  }
+
 }

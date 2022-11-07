@@ -39,10 +39,15 @@
         </ion-item-sliding>
       </ion-list>
     </ion-col>
-    <ion-fab vertical="bottom" horizontal="end" (click)="goCar()">
-      <ion-fab-button color="warning">
-        <ion-icon name="cart"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+
+   <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button  color="tertiary" (click)="goNewProduct()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="warning" (click)="goCar()">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+   </ion-fab>
+
   </ion-row>
 </ion-content>

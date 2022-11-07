@@ -9,7 +9,7 @@ import { ProductoService } from '../services/producto.service';
 })
 export class CarritoPage implements OnInit {
 
-  public car : Producto[];
+  public car : Producto[]=[];
   public total: number = 0;
 
   constructor(private productoService:ProductoService) { 
@@ -18,5 +18,15 @@ export class CarritoPage implements OnInit {
   }
   ngOnInit() {
   }
-
+  public removeCart(pos:number){
+    
+    if(this.productoService.getCar().length > 0){
+      this.total = this.productoService.restartTotal(pos);
+    }else{  
+      this.total=0;
+    }
+    this.productoService.removeCart(pos);
+    
+    this.car = this.productoService.getCar();
+  }
 }

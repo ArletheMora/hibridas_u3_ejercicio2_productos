@@ -70,16 +70,23 @@ export class ProductoService {
   public getTotal():number{
     return this.total;
   }
-
+  public restartTotal(res:number):number{
+    console.log("Posición: "+ res)
+    if(this.carrito.length > 0){
+      return (this.total = this.total - ((this.carrito[res].precio) * (this.carrito[res].cantidad)));
+    }else{
+      return this.total = 0;
+    }
+  }
   public getCar(): Producto[]{
     return this.carrito;
   }
-
-  public removeCar(pos:number){
+  public removeCart(pos:number){
     this.carrito.splice(pos, 1)
   }
 
   public addProduct(newProduct: Producto){
     this.producto.push(newProduct);
   }
+
 }

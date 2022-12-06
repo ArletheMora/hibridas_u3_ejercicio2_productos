@@ -14,7 +14,6 @@ export class NuevoProductoPage implements OnInit {
 
   constructor( private productService: ProductoService) {
     this.producto = {
-      id: '',
       nombre: '',
       precio: 0,
       descripcion: '',
@@ -31,7 +30,6 @@ export class NuevoProductoPage implements OnInit {
     this.productService.addProduct(this.producto)
 
     this.producto = {
-      id: '',
       nombre: '',
       precio: 0,
       descripcion: '',

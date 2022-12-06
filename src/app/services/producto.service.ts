@@ -1,92 +1,108 @@
 import { Producto } from './../models/producto';
 import { Injectable } from '@angular/core';
 
-
+import {map} from 'rxjs/operators';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
   private total : number = 0;
-  private producto: Producto[];
-  private carrito:Producto[] = [];
-  constructor() {
-    this.producto = [
-      {
-        id: '1',
-        nombre: 'Jabón',
-        precio: 15,
-        descripcion: 'Jabón neutro',
-        photo:"https://picsum.photos/400/?random=1",
-        cantidad:0
-      },
-      {
-        id: '2',
-        nombre: 'T.V',
-        precio: 15000,
-        descripcion: 'Televisón multimedia',
-        photo:"https://picsum.photos/400/?random=2",
-        cantidad:0
-      },
-      {
-        id: '3',
-        nombre: 'Mouse',
-        precio: 400,
-        descripcion: 'Mouse especializado a oficina',
-        photo:"https://picsum.photos/400/?random=3",
-        cantidad:0
-      },
-    ]
-  }
-  public getProduct(): Producto[]{
-    return this.producto;
-  }
-  public getProductByID(id:string):Producto{
-    let item: Producto;
-    item = this.producto.find((producto)=>{
-      return producto.id===id;
+  
+  private cart: Producto;
+  private carts : Producto[];
+  constructor(private firestore:AngularFirestore) {
+    this.cart = {
+      nombre: '',
+      precio: 0,
+      descripcion: '',
+      photo:'',
+      cantidad:0
+    }
+    this.carts = []
+    this.getCart().subscribe(res =>{
+      this.carts = res;
     });
-    return item;
   }
-  // ? Carrito
-
-
-  public addCar(pos:number){
-    pos =pos-1;
-    if(!(this.carrito.includes(this.producto[pos]))){
-      this.carrito.push(this.producto[pos]);
-      let index = this.carrito.findIndex(array => array.nombre === this.producto[pos].nombre);
-      this.carrito[index].cantidad+=1;
-      console.log('producto ' + this.carrito[index].nombre+ ' Cantidad ' + this.carrito[index].cantidad);
-      this.total += this.carrito[index].precio; 
-    }else{
-      let index = this.carrito.findIndex(array => array.nombre === this.producto[pos].nombre);
-      this.carrito[index].cantidad+=1;
-      console.log('producto ' + this.carrito[index].nombre+ ' Cantidad ' + this.carrito[index].cantidad);
-      this.total += this.carrito[index].precio; 
+  public getProduct(): Observable<Producto[]>{
+    return this.firestore.collection('products').snapshotChanges().pipe(
+      map(actions =>{
+        return actions.map(a =>{
+          const data = a.payload.doc.data() as Producto;
+          const id = a.payload.doc.id;
+          return {id,...data}
+        });
+      }));
     }
-  }
+    public getCart(): Observable<Producto[]>{
+      return this.firestore.collection('cart').snapshotChanges().pipe(
+        map(actions =>{
+          return actions.map(a =>{
+            const data = a.payload.doc.data() as Producto;
+            const id = a.payload.doc.id;
+            return {id,...data}
+          });
+        }));
+      }
+      public getProductByID(id : string){
+        let result = this.firestore.collection('products').doc(id).valueChanges();
+        return result;
+      }
+      public getCartByID(id : string){
+        let result = this.firestore.collection('cart').doc(id).valueChanges();
+        return result;
+      }
+      // ? Carrito
+      
+      private prueba :boolean = false;
+      public addCar(id : string,carrito : Producto){
+        
+        this.carts.forEach((element)=>{
+          
+          if(element.nombre == carrito.nombre){
+            carrito.cantidad=element.cantidad+1;
+            this.prueba = true;
+            return this.firestore.collection('cart').doc(element.id).update(carrito);
+            
+          }
+        })
+        if(this.prueba == false){
+        carrito.cantidad+=1;
+        return this.firestore.collection('cart').add(carrito);}
+      }
+      public calcTot(cart:Producto[]):number{
+        var element =0
+        for (let i = 0; i < cart.length; i++) {
+          
+          element += (cart[i].precio * cart[i].cantidad);
 
-  public getTotal():number{
-    return this.total;
-  }
-  public restartTotal(res:number):number{
-    console.log("Posición: "+ res)
-    if(this.carrito.length > 0){
-      return (this.total = this.total - ((this.carrito[res].precio) * (this.carrito[res].cantidad)));
-    }else{
-      return this.total = 0;
+        }
+        return element
+      }
+      
+      
+      public restartTotal(id:string, carrito: Producto):number{
+        if(carrito.cantidad > 0){
+          const rest = (carrito.precio) * (carrito.cantidad);
+          this.firestore.collection('cart').doc(id).update(carrito);
+          this.total = this.total - (rest);
+          return this.total
+        }
+      }
+      public removeCart(id:string, carrito : Producto){
+        if(carrito.cantidad > 1){
+          carrito.cantidad -=1;
+          this.firestore.collection('cart').doc(id).update(carrito);
+        }else{
+          this.firestore.collection('cart').doc(id).delete();
+        }
+      }
+      
+      public addProduct(newProduct: Producto){
+        return this.firestore.collection('products').add(newProduct);
+      }
+      
     }
-  }
-  public getCar(): Producto[]{
-    return this.carrito;
-  }
-  public removeCart(pos:number){
-    this.carrito.splice(pos, 1)
-  }
-
-  public addProduct(newProduct: Producto){
-    this.producto.push(newProduct);
-  }
-
-}
+    

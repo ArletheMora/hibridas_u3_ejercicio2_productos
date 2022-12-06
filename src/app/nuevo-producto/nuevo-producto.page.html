@@ -8,29 +8,25 @@
 </ion-header>
 
 <ion-content>
-<ion-card>
-  <ion-item>
-    <ion-label position="floating">Id</ion-label>
-    <ion-input [(ngModel)]="producto.id" type="text" placeholder="Identificador del producto"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Nombre</ion-label>
-    <ion-input [(ngModel)]="producto.nombre" type="text" placeholder="Nombre del producto"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Descripción</ion-label>
-    <ion-input [(ngModel)]="producto.descripcion" type="text" placeholder="Descripción del producto"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Foto</ion-label>
-    <ion-input [(ngModel)]="producto.photo" type="text" placeholder="Enlace de imagen"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Precio</ion-label>
-    <ion-input [(ngModel)]="producto.precio" type="text" placeholder="Precio unitario"></ion-input>
-  </ion-item>
-  <ion-button (click)="addProduct()" expand="block" fill="clear" shape="round">
-    Agregar producto
-  </ion-button>
-</ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="producto.nombre" type="text" placeholder="Nombre del producto"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-input [(ngModel)]="producto.descripcion" type="text" placeholder="Descripción del producto"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Foto</ion-label>
+      <ion-input [(ngModel)]="producto.photo" type="text" placeholder="Enlace de imagen"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input [(ngModel)]="producto.precio" type="text" placeholder="Precio unitario"></ion-input>
+    </ion-item>
+    <ion-button (click)="addProduct()" expand="block" fill="clear" shape="round">
+      Agregar producto
+    </ion-button>
+  </ion-card>
 </ion-content>

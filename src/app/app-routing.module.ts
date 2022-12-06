@@ -12,13 +12,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'producto',
-    children: [
-      {
-        path: ':id', 
+        path: 'producto', 
         loadChildren: () => import('./producto/producto.module').then(m => m.ProductoPageModule)
-      }
-    ]
   },
   {
     path: 'carrito',

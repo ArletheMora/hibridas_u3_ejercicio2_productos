@@ -10,29 +10,21 @@
       <ion-list>
         <ion-item-sliding *ngFor="let item of products; let i = index">
           <ion-item>
-            <ion-avatar>
-              <img
-              [src]="item.photo"
-              style="margin: 4px"
-              [routerLink]="['/producto', item.id]"
-            />
+            <ion-avatar (click)="getProductById(item.id)">
+              <img [src]="item.photo" style="margin: 4px" />
             </ion-avatar>
-            
-            <ion-label [routerLink]="['/producto', item.id]">
+
+            <ion-label (click)="getProductById(item.id)">
               <ion-chip color="primary">
-                <ion-label (click)="getProductById(item.id)"
-                  >{{item.nombre}}</ion-label
-                >
+                <ion-label>{{item.nombre}}</ion-label>
               </ion-chip>
             </ion-label>
-            <ion-label [routerLink]="['/producto', item.id]">
-              <ion-chip color="primary" [routerLink]="['/producto', item.id]">
-                <ion-label (click)="getProductById(item.id)"
-                  >$ {{item.precio}}</ion-label
-                >
+            <ion-label (click)="getProductById(item.id)">
+              <ion-chip color="primary">
+                <ion-label>$ {{item.precio}}</ion-label>
               </ion-chip>
             </ion-label>
-            <ion-button (click)="addCar(item.id)" expand="block">
+            <ion-button (click)="addCar(item.id, item)" expand="block">
               <ion-icon name="cart-outline"></ion-icon>
             </ion-button>
           </ion-item>
@@ -40,14 +32,14 @@
       </ion-list>
     </ion-col>
 
-   <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button  color="tertiary" (click)="goNewProduct()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-button color="warning" (click)="goCar()">
-      <ion-icon name="cart"></ion-icon>
-    </ion-fab-button>
-   </ion-fab>
+    <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button color="tertiary" (click)="goNewProduct()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="warning" (click)="goCar()">
+        <ion-icon name="cart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 
   </ion-row>
 </ion-content>
